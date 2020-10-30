@@ -6,8 +6,11 @@ body {
     font-size: 13px;
     min-width: 320px;
 }
-h4 {
+h4, h3 {
     text-align: center;
+}
+h4 {
+    color:white;
 }
 p {
     letter-spacing: 1.5px;
