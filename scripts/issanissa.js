@@ -102,10 +102,10 @@ const fetchTwetches = async(sdk, selOrder) => {
         orderBy = 'orderBy: LIKES_BY_POST_ID__COUNT_DESC';
     };
     
-    let botList = 'in: ["652","4603"]';
+    //let botList = 'in: ["652","4603"]';
         
     response = await sdk.query(`{
-  allPosts(filter: {bContent: {endsWith: "$nce"}, and: {userId: {${botList}}}}, ${orderBy}) {
+  allPosts(filter: {bContent: {endsWith: "$nce"}}, ${orderBy}) {
     nodes {
       bContent
       createdAt
