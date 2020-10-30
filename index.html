@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
    <head>
-    <title>ZeroSchool</title>
+    <title>Nice Matin - Social</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="zeroschool"/>
+    <meta property="og:title" content="nicematin.social"/>
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://zeroschool.org">
-    <meta property="og:image:url" content="https://zeroschool.org/assets/resources/enso-black.png">
-    <meta property="og:description" content="Ceci n'est pas une école.">
-    <meta name="apple-mobile-web-app-title" content="ZeroSchool">
+    <meta property="og:url" content="https://nicematin.social">
+    <meta property="og:image:url" content="https://nicematin.social/assets/resources/favicon.png">
+    <meta property="og:description" content="(vrai) réseau social depuis 2020">
+    <meta name="apple-mobile-web-app-title" content="Nice Matin - Social">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet">
@@ -17,33 +17,33 @@
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/uyouthe/pwacss/pwacss.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap">
-    <link rel="icon" type="image/png" href="/assets/resources/enso-black.png"/>  
-    <link rel="apple-touch-icon" href="assets/resources/enso-black.png">
+    <link rel="icon" type="image/png" href="/assets/resources/favicon.png"/>  
+    <link rel="apple-touch-icon" href="assets/resources/favicon.png">
     <script src="https://cdn.jsdelivr.net/npm/@twetch/sdk@0.2.11/dist/twetch.min.js"></script>
     <script src="https://www.moneybutton.com/moneybutton.js"></script>
     <script src="https://one.relayx.io/relayone.js"></script>
-    <script src="/scripts/ilitch.js"></script>
+    <script src="/scripts/issanissa.js"></script>
    </head>
    <body>
     <div class="top">
         <!-- <a class="nes-logo config" href="/profile"></a> -->
-        <h4><a href="/">ZeroSchool</a></h4>
+        <h3><a href="/">Nice Matin</a></h3>
+        <h4>(vrai) réseau social depuis 2020</h4>
         <a href="/info"><img class="question nes-pointer" src="assets/resources/question_block_32.png"></a>
     </div>
     <div class="poster">
         <form onsubmit="return false" id="post-container">
-            <textarea type="text" id="post" class="nes-input is-dark" placeholder="What do you *really* wanna learn?"></textarea>
+            <textarea type="text" id="post" class="nes-input is-dark" placeholder="Quoi de neuf les pitchouns ?"></textarea>
             <input type="submit" id="tPost" value="Post" onclick="twetchPost()">
         </form>
     </div>
     <div class="selection"><div class="nes-select is-dark" id="qselect">
         <!--<select required id="order"><option value="0">Most recent</option><option value="1">Likes</option><option value="2">PoW</option><option value="3">News</option></select></div>-->
-        <select required id="order"><option value="0">Most recent</option><option value="1">Likes</option></select</div>
+        <select required id="order"><option value="0">Plus récent</option><option value="1">Likes</option></select</div>
     </div>
     <div id="message-container" class=""></div>
     <dialog class="nes-dialog" id="dlg"></dialog>
     <script>
-        const inReplyTo = 'b3ab98273886ffa0dc2b312514e58b1dc8049a799d9eea47de60531b8eb30b17'; // Twetch ZeroSchool: I wanna learn _____
         const publicVapidKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjUyIn0sImlhdCI6MTU5MjQwMTgxNH0.adZ_QsfshakYBNASIjMWQw46rh__8t8_f75n5I3w2jg';
         const savePermissionToken = (token) => {
             localStorage.setItem('token', token);
@@ -53,7 +53,7 @@
                 return localStorage.getItem('token');
             }
         }
-        const imbCli = window.location.href.includes('localhost') ? 'ee9db2a1a7003d2f2f6798eb4616f2fd' : 'ce4eb6ea41a4f43044dd7e71c08e50b2';
+        const imbCli = window.location.href.includes('localhost') ? 'ee9db2a1a7003d2f2f6798eb4616f2fd' : '1fc3770cf895558a4a8533e09c71d067';
         const imb = new moneyButton.IMB({
             clientIdentifier: imbCli,
             permission: getPermissionForCurrentUser(), 
@@ -62,22 +62,20 @@
         var sdk = new twetchjs({ clientIdentifier: '9d27a879-ee0c-4653-8839-a4b2f6fa8023' });
         var coinSound = new Audio(); coinSound.src = '/assets/resources/coin.wav', dialog = {}, loadingLike = false;
         //var outputs = [], cryptoOperations = [], loadingPost = false, selOrder = 0, fileTwetch = 0, loadingText = "Deschooling society";
-        var outputs = [], cryptoOperations = [], loadingPost = false, selOrder = 0, loadingText = "Deschooling society";
+        var outputs = [], cryptoOperations = [], loadingPost = false, selOrder = 0, loadingText = "Aspetta pitchoun, je charge";
         async function twgin() {
             if (localStorage.getItem('tokenTwetchAuth')) {
                 sdk.authenticated = true;
                 await sdk.authenticate();
-                await fetchTwetches(sdk, 0, inReplyTo);
+                await fetchTwetches(sdk, 0);
                 //await fetchTwetches(sdk, localStorage.getItem('orderBy') !== undefined ? localStorage.getItem('orderBy') : 0);
-            } else {
-                window.location.href = "/login";
-            }
+            } 
         }
         twgin();
         document.getElementById("order").onchange = () => {
             selOrder = document.getElementById("order").value;
             localStorage.setItem('orderBy', selOrder);
-            fetchTwetches(sdk, selOrder, inReplyTo);
+            fetchTwetches(sdk, selOrder);
         }
         if (localStorage.getItem('orderBy')) {
             selOrder = localStorage.getItem('orderBy');
@@ -105,12 +103,7 @@
         async function build(content, action, tipped) {
             let obj, twOutput;
             if (action === 'twetch/post@0.0.1') {
-               if (tipped){
-                  obj = {bContent: content}
-               } else {
-                obj = {bContent: content,
-                      mapReply: inReplyTo}
-               }
+                obj = {bContent: content}
             } else {
                 obj = {postTransaction: content}
             }
@@ -127,15 +120,15 @@
                 let penny = await getPenny();
                 outputs[2].amount += penny;
                 if (outputs.length < 4) {
-                    outputs[2].amount += (penny * 218);
+                    outputs[2].amount += (penny * 21.8);
                 } 
                 else {
-                    outputs[3].amount += (penny * 218);
+                    outputs[3].amount += (penny * 21.8);
                 }
             } else if (action === 'twetch/post@0.0.1'){
                 outputs[2].to = '16bKbvsXc279ZTgvjgTQ29JezjQ3sRVA8N';
                 let penny = await getPenny();
-                outputs[2].amount += (penny * 218)
+                outputs[2].amount += (penny * 21.8)
             }
             cryptoOperations = [
                 {name: 'myAddress', method: 'address', key: 'identity'},
@@ -159,7 +152,7 @@
                         await sdk.publishRequest({signed_raw_tx: payment.rawtx, action: action});
                         if (action === 'twetch/post@0.0.1') {
                             loadingPost = false;
-                            loadingText = 'Deschooling society';
+                            loadingText = 'Aspetta pitchoun, je charge';
                             location.reload();
                         }
                         else if (action === 'twetch/like@0.0.1') {
@@ -193,7 +186,7 @@
                 }
                 if (action === 'twetch/post@0.0.1') {
                     loadingPost = false;
-                    loadingText = 'Deschooling society';
+                    loadingText = 'Aspetta pitchoun, je charge';
                     location.reload();
                 }
                 else if (action === 'twetch/like@0.0.1') {
@@ -210,7 +203,7 @@
                dialog = document.createElement("dialog");
                dialog.setAttribute("id", "dlg");
                dialog.setAttribute("class", "nes-dialog");
-               dialog.innerHTML = `<form method="dialog" class="loading"><p id="loading">Deschooling society</p><menu class="dialog-menu"></menu></form>`;
+               dialog.innerHTML = `<form method="dialog" class="loading"><p id="loading">Aspetta pitchoun, je charge</p><menu class="dialog-menu"></menu></form>`;
                document.body.appendChild(dialog);
             }
             dialogPolyfill.registerDialog(dialog);
@@ -270,7 +263,7 @@
             if (amt.charAt(0) != '$'){
                 amt = '$'+amt
             }
-            twetchPost(`/pay @${tipU} ${amt} from $zeroschool`);
+            twetchPost(`/pay @${tipU} ${amt} from nicematin.social`);
             window.scrollTo(0,0)
         }
         async function twetchPost(text) {
