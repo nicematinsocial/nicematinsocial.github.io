@@ -136,7 +136,7 @@ const fetchTwetches = async(sdk, selOrder) => {
     let twetches = document.getElementsByClassName("twetch");
     populateHTML(posts.length);
     const addTwetch = (post, i) => {
-        let content = post.bContent.replace('$zeroschool', '');
+        let content = post.bContent.replace('$nce', '');
         //let boostData = data.find(tx => tx.txid === post.transaction);
         //boostValue = boostData !== undefined ? boostData.boosts : 0;
         /*if (profiles[i] !== undefined) {
