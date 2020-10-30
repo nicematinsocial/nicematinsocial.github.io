@@ -273,6 +273,7 @@
                 tipped = true;
             } 
             else {
+                post += " $nce";
                 loadingDlg();
             }
             await build(post,'twetch/post@0.0.1', tipped);
