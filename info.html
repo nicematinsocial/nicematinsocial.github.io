@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html>
    <head>
-    <title>ZeroSchool</title>
+    <title>Nice Matin - Social</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="apple-mobile-web-app-title" content="ZeroSchool">
+    <meta name="apple-mobile-web-app-title" content="nicematin.social">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet">
@@ -24,23 +24,23 @@
     </div>
     <div class="info center">
         <div class="nes-container is-rounded is-dark">
-            <p class="title is-dark">Welcome!</p>
-            <p>This is a Twetch client where users can discuss about what they really want to learn.</p>
-            <p>Invisible Money Button & RelayX are supported.</p>
-            <p>Posts, Likes, and tipping are currently supported.</p>
-            <p>Posts & Likes are $2.18.</p>
+            <p class="title is-dark">Bienvenue!</p>
+            <p>Ceci est un client Twetch dédié à la ville de Nice et ses alentours.</p>
+            <p>Money Button & RelayX sont supportés</p>
+            <p>Postez, Likez, tippez comme bon vous semble.</p>
+            <p>Posts & Likes sont à ~15 centimes</p>
             <p>Enjoy!</p>
         </div>
-        <a class="nes-btn is-success" id="buybsv" onclick="buybsv()">Buy BSV</a>
-        <a class="nes-btn" id="logout" onclick="logout()">Logout</a>
+        <a class="nes-btn is-success" id="login" onclick="login()">Se Connecter</a>
+        <a class="nes-btn" id="logout" onclick="logout()">Se Déconnecter</a>
         <dialog class="nes-dialog center" id="dlg"></dialog>
     </div>
     <div id="widget-container"></div>
     </body>
     <script>
         var dialog = document.getElementById('dlg');
-        function buybsv() {
-            relayotc.buy('widget-container', { referrer: "zeroschool@moneybutton.org" })
+        function login() {
+            window.location.href = '/login';
         }
         function logout() {
             localStorage.clear();
@@ -57,5 +57,4 @@
             }
         }
     </script>
-    <script src="https://otc-staging.relayx.io/relayotc.js" defer></script>
 </html>
