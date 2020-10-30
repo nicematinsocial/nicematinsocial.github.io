@@ -30,37 +30,37 @@ const timeago = (ms) => {
     ms = Date.now() - ms;
     let ago = Math.floor(ms / 1000);
     let part = 0;
-    if (ago < 15) { return "just now"; }
+    if (ago < 15) { return "maintenant"; }
     if (ago < 60) { return ago + " sec"; }
     if (ago < 120) { return "1 min"; }
     if (ago < 3600) {
         while (ago >= 60) { ago -= 60; part += 1; }
         return part + " min.";
     }
-    if (ago < 7200) { return "1 hr"; }
+    if (ago < 7200) { return "1 h"; }
     if (ago < 86400) {
         while (ago >= 3600) { ago -= 3600; part += 1; }
         return part + " hrs";
     }
-    if (ago < 172800) { return "1 day"; }
+    if (ago < 172800) { return "1 j"; }
     if (ago < 604800) {
         part = parseInt(ago / 86400);
-        return part + " day(s)";
+        return part + " jour(s)";
     }
-    if (ago < 1209600) { return "1 wk"; }
+    if (ago < 1209600) { return "1 sem"; }
     if (ago < 2592000) {
         while (ago >= 604800) { ago -= 604800; part += 1; }
         return part + " wks";
     }
-    if (ago < 5184000) { return "1 mth"; }
+    if (ago < 5184000) { return "1 mois"; }
     if (ago < 31536000) {
         while (ago >= 2592000) { ago -= 2592000; part += 1; }
-        return part + " mths";
+        return part + " mois";
     }
     if (ago < 1419120000) {
-        return ">1 yr";
+        return ">1 an";
     }
-    return "Not yet";
+    return "Pas encore";
 }
 const populateHTML = (count) => {
     for (let i = 0; i < count; i++){
@@ -87,7 +87,7 @@ const compare = (a,b) => {
     else if (aBoost > bBoost) {comp = -1} 
     return comp;
 }
-const fetchTwetches = async(sdk, selOrder, rootTx) => {
+const fetchTwetches = async(sdk, selOrder) => {
     // Make sure #message-container exists
     let $container = document.getElementById("message-container");
     if ($container != null) {
@@ -101,23 +101,25 @@ const fetchTwetches = async(sdk, selOrder, rootTx) => {
     if (selOrder === '1') {
         orderBy = 'orderBy: LIKES_BY_POST_ID__COUNT_DESC';
     };
+    
+    let botList = ["652","4603"];
         
     response = await sdk.query(`{
-          allPosts(condition: {replyPostId: "488271"}, ${orderBy}) {
-            nodes {
-              bContent
-              createdAt
-              numLikes
-              transaction
-              userId
-              youLiked
-              userByUserId {
-                icon
-                name
-              }
-            }
-          }
-        }`);
+  allPosts(filter: {bContent: {endsWith: "$nce"}, and: {userId: {in: ${botList}}}}, ${orderBy}) {
+    nodes {
+      bContent
+      createdAt
+      numLikes
+      transaction
+      userId
+      youLiked
+      userByUserId {
+        icon
+        name
+      }
+    }
+  }
+}`);
 
     posts = response.allPosts.nodes;
     let profiles = document.getElementsByClassName("nes-avatar")
