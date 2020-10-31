@@ -64,12 +64,12 @@
         //var outputs = [], cryptoOperations = [], loadingPost = false, selOrder = 0, fileTwetch = 0, loadingText = "Deschooling society";
         var outputs = [], cryptoOperations = [], loadingPost = false, selOrder = 0, loadingText = "Aspetta pitchoun, je charge";
         async function twgin() {
-            /*if (localStorage.getItem('tokenTwetchAuth')) {
+            if (localStorage.getItem('tokenTwetchAuth')) {
                 sdk.authenticated = true;
                 await sdk.authenticate();
                 await fetchTwetches(sdk, 0);
                 //await fetchTwetches(sdk, localStorage.getItem('orderBy') !== undefined ? localStorage.getItem('orderBy') : 0);
-            } */
+            } 
            fetchTwetches(sdk, 0);
         }
         twgin();
