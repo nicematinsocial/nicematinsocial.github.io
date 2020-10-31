@@ -6,7 +6,7 @@ const getPermissionForCurrentUser = () => {
         return localStorage.getItem('token');
     }
 }
-const imbCli = window.location.href.includes('localhost') ? '1913d9e4da4bad3e2e3da03e19df0705' : 'ce4eb6ea41a4f43044dd7e71c08e50b2';
+const imbCli = window.location.href.includes('localhost') ? '1913d9e4da4bad3e2e3da03e19df0705' : '1fc3770cf895558a4a8533e09c71d067';
 const imb = new moneyButton.IMB({
     clientIdentifier: imbCli,
     permission: getPermissionForCurrentUser(), 
