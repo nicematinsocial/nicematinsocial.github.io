@@ -1,0 +1,15 @@
+:: Tweets are stored in a text file "twetch.txt" which content can be accessed via the twdata node.
+:: Here is an example file 
+
+{
+\"created_at\":\"Sun Nov 01 15:10:00 +0000 2020\",
+\"twt_id\":\"1322918821099810817\",
+\"text\":\"On dit que toutes les libertés se valent. Non, pour moi, au-dessus de toutes, il y a une liberté fondamentale, celle du droit à la sécurité.\\n\\nRetrouvez mon entretien complet sur @lemondefr : https://www.lemonde.fr/politique/article/2020/10/31/christian-estrosi-aucun-droit-pour-les-ennemis-du-droit_6057992_823448.html \",
+\"media\":[\"https://pbs.twimg.com/media/ElvbM1EXYAAH_e3.jpg\"],
+\"user\":{
+	\"name\":\"Christian Estrosi\",
+	\"screen_name\":\"cestrosi\",
+	\"created_at\":\"Tue Oct 20 06:39:13 +0000 2009\",
+	\"twt_id\":\"83784709\",
+	\"profile_image_url\":\"http://pbs.twimg.com/profile_images/844922661482434560/LmqatSLX_normal.jpg\"}
+}
