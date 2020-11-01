@@ -143,10 +143,10 @@ allPosts(filter: {or:[{bContent: {endsWith: "$nce"}},
     const addTwetch = (post, i) => {
         let content = "";
         if (post.bContent === " "){
-            let twdata = post.mapTwdata.replace('\\','');
+            let twdata = post.mapTwdata.replace('\"','"');
             let obj = JSON.parse(twdata);
             content = obj.text;
-        } else {
+        } else if (post.mapTwdata == null) {
             content = post.bContent.replace('$nce', '');
         }
         //let boostData = data.find(tx => tx.txid === post.transaction);
