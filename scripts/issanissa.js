@@ -105,25 +105,25 @@ const fetchTwetches = async(sdk, selOrder) => {
     //let botList = 'in: ["652","4603"]';
         
     response = await sdk.query(`{
-allPosts(filter:
-{or:[
-{bContent: {endsWith: "$nce"}},
-{userId: {in: ["17145","17146"]}}
-]},${orderBy})
-{
-nodes {
-bContent
-createdAt
-numLikes
-transaction
-userId
-youLiked
-userByUserId {
-icon
-name
-}
-}
-}
+allPosts(filter: {or:[{bContent: {endsWith: "$nce"}},
+                {userId: {in: ["17145","17146"]}}]},
+        ${orderBy})
+            {
+                nodes {
+                bContent
+                bFilename
+                createdAt
+                mapTwdata
+                numLikes
+                transaction
+                userId
+                youLiked
+                userByUserId {
+                    icon
+                    name
+                    }
+                }
+            }
 }`);
 
     posts = response.allPosts.nodes;
@@ -141,7 +141,14 @@ name
     let twetches = document.getElementsByClassName("twetch");
     populateHTML(posts.length);
     const addTwetch = (post, i) => {
-        let content = post.bContent.replace('$nce', '');
+        let content = "";
+        if (post.bFilename ==="twetch.txt"){
+            let twdata = post.mapTwdata.replace('\','');
+            let obj = JSON.parse(twdata);
+            content = obj.text;
+        } else {
+            content = post.bContent.replace('$nce', '');
+        }
         //let boostData = data.find(tx => tx.txid === post.transaction);
         //boostValue = boostData !== undefined ? boostData.boosts : 0;
         /*if (profiles[i] !== undefined) {
