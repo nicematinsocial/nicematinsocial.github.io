@@ -143,7 +143,7 @@ allPosts(filter: {or:[{bContent: {endsWith: "$nce"}},
     const addTwetch = (post, i) => {
         let content = "";
         if (post.bFilename ==="twetch.txt"){
-            let twdata = post.mapTwdata.replace('\','');
+            let twdata = post.mapTwdata.replace('\\','');
             let obj = JSON.parse(twdata);
             content = obj.text;
         } else {
