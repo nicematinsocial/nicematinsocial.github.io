@@ -109,7 +109,7 @@ allPosts(filter:
 {or:[
 {bContent: {endsWith: "$nce"}},
 {userId: {in: ["17145","17146"]}}
-]})
+]},${orderBy})
 {
 nodes {
 bContent
